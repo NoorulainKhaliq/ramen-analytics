@@ -9,8 +9,15 @@ class App extends Component {
       users: []
     };
   }
+  componentDidMount() {
+    axios
+      .get("/users")
+      .then(res => res.data)
+      .then(users => this.setState({ users }));
+  }
 
   render() {
+    console.log(this.state.users, "from frontend");
     return (
       <div className="allUsers">
         <h1>"hey"</h1>

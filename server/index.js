@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 let csvFilePath = "./server/ramen.csv";
+let parseData = require("./functions");
 
 // i'm using csvtojson which is a wrapper over papa-parser --converts csv files to json
 // json objects are easier to work with and easier to send to the frontend as well and can be easily manipulated
@@ -20,27 +21,31 @@ app
     }
   });
 
-// possible GET route
-// using require ('./ramen.csv') as filepath throws an error of unexpected token
-// and using filepath './ramen.csv throws an error of module cannot be found
-// i suspect it has something to do with webpack not loading the file - possibly because its watching main.js
-// i have attempted to add loaders to webpack, but that also did not work
-// after much trial and error I was able to load the file using an absolute path
-// but soon realized that would not work anywhere but on my machine
-// played around with the file path using "path.resolve", but eventually figured i didn't need "path.resolve" either,
-// i could just use "./server/ramen.csv" directly and have the file load.
-// i'm still a little uncertain why i'm having errors with webpack loading the .csv file.
-
+//uses parseData function defined in the function file
 app.get("/users", (req, res, next) => {
   csv()
     .fromFile(csvFilePath)
     .on("end_parsed", jsonArrObj => {
-      console.log(jsonArrObj); // able to view data from csv file as a jSon obj
+      // using 'end_parsed" so that work can be done once everything has been parsed
+      res.send(parseData(jsonArrObj)); // sends parsed data to the frontend
     })
     .on("error", err => {
       console.log(err);
     });
 });
+//lists every ramen consumed
+app.get("/cups", (req, res, next) => {
+  csv()
+    .fromFile(csvFilePath)
+    .on("end_parsed", jsonArrObj => {
+      res.send(jsonArrObj);
+    })
+    .on("error", err => {
+      console.log(err);
+    });
+});
+
+//cups route -- display all cups consumed in general
 
 //starts the server
 app.listen(3000, (req, res, next) => {

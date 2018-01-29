@@ -52,8 +52,8 @@ let getDate = data => {
 
 //creates an object with month, day of highest consumption and the count of cups consumed
 let maxMonthConsumption = data => {
-  let dataToDate = getDate(data);
   let obj = {};
+  let dataToDate = getDate(data);
   Object.keys(dataToDate).forEach(date => {
     let month = date.slice(0, 2);
     let day = date.slice(3, 5);

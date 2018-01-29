@@ -3,12 +3,14 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Users from "./Users";
+import Header from "./Header";
 
 export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      users: {}
+      users: {},
+      cups: []
     };
   }
 
@@ -22,6 +24,7 @@ export default class Main extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Switch>
           <Route
             exact

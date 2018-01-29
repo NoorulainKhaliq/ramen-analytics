@@ -2,7 +2,7 @@
 const { resolve } = require("path");
 
 var config = {
-  entry: "./src/client/main.js",
+  entry: "./src/client/index.js",
   output: {
     path: __dirname,
     filename: "./public/bundle.js",

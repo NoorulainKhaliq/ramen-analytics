@@ -47,8 +47,6 @@ app.get("/cups", (req, res, next) => {
 });
 
 //returns an object of each month with the day most cups were consumed
-//the formatting isn't the best for this - so it might change later
-//maxMonthConsumption function is defined in the functions.js file
 app.get("/maxMonthCount", (req, res, next) => {
   csv()
     .fromFile(csvFilePath)

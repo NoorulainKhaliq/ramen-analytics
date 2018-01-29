@@ -40,12 +40,12 @@ let parseData = data => {
   return output;
 };
 
-//creates an object of month-date:cups consumed for that month
 let getDate = data => {
   let obj = {};
   data.forEach(ramen => {
+    let year = ramen.date.slice(0, 4);
     let date = ramen.date.slice(5, 10);
-    obj[date] ? obj[date]++ : (obj[date] = 1);
+    obj[date] ? obj[date][0]++ : (obj[date] = [1, year]);
   });
   return obj;
 };
@@ -64,7 +64,17 @@ let maxMonthConsumption = data => {
       obj[month] = [day, currVal];
     }
   });
-  return obj;
+  //reformats above obj to include all information relevant to the day of max cup consumption in a given a month
+  let arrObj = [];
+  Object.keys(obj).forEach(date => {
+    arrObj.push({
+      year: obj[date][1][1],
+      month: date,
+      mostActiveDay: obj[date][0],
+      cupsConsumedOnActiveDay: obj[date][1][0]
+    });
+  });
+  return arrObj;
 };
 
 module.exports = { parseData, maxMonthConsumption, getDate };

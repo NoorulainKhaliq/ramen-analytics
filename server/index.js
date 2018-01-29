@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 let csvFilePath = "./server/ramen.csv";
-let parseData = require("./functions");
+//let parseData = require("./functions");
+let { parseData, maxMonthConsumption, getDate } = require("./functions");
 
 // i'm using csvtojson which is a wrapper over papa-parser --converts csv files to json
 // json objects are easier to work with and easier to send to the frontend as well and can be easily manipulated
@@ -45,7 +46,19 @@ app.get("/cups", (req, res, next) => {
     });
 });
 
-//cups route -- display all cups consumed in general
+//returns an object of each month with the day most cups were consumed
+//the formatting isn't the best for this - so it might change later
+//maxMonthConsumption function is defined in the functions.js file
+app.get("/maxMonthCount", (req, res, next) => {
+  csv()
+    .fromFile(csvFilePath)
+    .on("end_parsed", jsonArrObj => {
+      res.send(maxMonthConsumption(jsonArrObj));
+    })
+    .on("error", err => {
+      console.log(err);
+    });
+});
 
 //starts the server
 app.listen(3000, (req, res, next) => {

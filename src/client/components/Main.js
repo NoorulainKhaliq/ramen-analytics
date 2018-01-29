@@ -12,9 +12,9 @@ export default class Main extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios
-      .get("users")
+      .get("/api/users")
       .then(res => res.data)
       .then(users => this.setState({ users }));
   }
@@ -25,7 +25,7 @@ export default class Main extends Component {
         <Switch>
           <Route
             exact
-            path="/"
+            path="/users"
             render={props => <Users allUsers={this.state.users} />}
           />
         </Switch>

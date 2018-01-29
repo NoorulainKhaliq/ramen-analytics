@@ -1,15 +1,8 @@
-const csv = require("csvtojson");
 const express = require("express");
 const app = express();
 const path = require("path");
-let csvFilePath = "./server/ramen.csv";
-//let parseData = require("./functions");
-let { parseData, maxMonthConsumption, getDate } = require("./functions");
+const { resolve } = require("path");
 
-// i'm using csvtojson which is a wrapper over papa-parser --converts csv files to json
-// json objects are easier to work with and easier to send to the frontend as well and can be easily manipulated
-
-//middleware -- serves up public folder to port
 app
   .use(express.static(path.join(__dirname, "..", "public")))
   .use((req, res, next) => {
@@ -22,41 +15,11 @@ app
     }
   });
 
-//uses parseData function defined in the function file
-app.get("/users", (req, res, next) => {
-  csv()
-    .fromFile(csvFilePath)
-    .on("end_parsed", jsonArrObj => {
-      // using 'end_parsed" so that work can be done once everything has been parsed
-      res.send(parseData(jsonArrObj)); // sends parsed data to the frontend
-    })
-    .on("error", err => {
-      console.log(err);
-    });
-});
-//lists every ramen consumed
-app.get("/cups", (req, res, next) => {
-  csv()
-    .fromFile(csvFilePath)
-    .on("end_parsed", jsonArrObj => {
-      res.send(jsonArrObj);
-    })
-    .on("error", err => {
-      console.log(err);
-    });
-});
-
-//returns an object of each month with the day most cups were consumed
-app.get("/maxMonthCount", (req, res, next) => {
-  csv()
-    .fromFile(csvFilePath)
-    .on("end_parsed", jsonArrObj => {
-      res.send(maxMonthConsumption(jsonArrObj));
-    })
-    .on("error", err => {
-      console.log(err);
-    });
-});
+app
+  .use("/api", require("./api"))
+  .get("/*", (_, res) =>
+    res.sendFile(resolve(__dirname, "..", "public", "index.html"))
+  );
 
 //starts the server
 app.listen(3000, (req, res, next) => {

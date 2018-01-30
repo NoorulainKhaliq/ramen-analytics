@@ -2,7 +2,12 @@ const api = require("express").Router();
 const csv = require("csvtojson");
 
 let csvFilePath = "./server/ramen.csv";
-let { parseData, maxMonthConsumption, getDate } = require("./functions");
+let {
+  parseData,
+  maxMonthConsumption,
+  getDat,
+  totalCups
+} = require("./functions");
 
 //uses parseData function defined in the function file
 api.get("/users", (req, res, next) => {
@@ -22,7 +27,7 @@ api.get("/cups", (req, res, next) => {
   csv()
     .fromFile(csvFilePath)
     .on("end_parsed", jsonArrObj => {
-      res.send(jsonArrObj);
+      res.send(totalCups(jsonArrObj));
     })
     .on("error", err => {
       console.log(err);

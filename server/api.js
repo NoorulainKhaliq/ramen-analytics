@@ -27,6 +27,7 @@ api.get("/cups", (req, res, next) => {
   csv()
     .fromFile(csvFilePath)
     .on("end_parsed", jsonArrObj => {
+      let check = totalCups(jsonArrObj);
       res.send(totalCups(jsonArrObj));
     })
     .on("error", err => {

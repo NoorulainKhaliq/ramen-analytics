@@ -12,6 +12,11 @@ export default class Header extends Component {
                 Users
               </button>
             </Link>
+            <Link to="/cups">
+              <button type="button" className="btn btn-secondary btn-lg">
+                Cups
+              </button>
+            </Link>
           </div>
         </header>
         <hr />

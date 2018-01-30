@@ -11,7 +11,7 @@ export default class Users extends Component {
 
   render() {
     let users = this.state.users;
-    console.log(users);
+
     return (
       <div>
         <h3>Favorite Ramen by User</h3>

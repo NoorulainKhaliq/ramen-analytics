@@ -4,7 +4,7 @@ const request = require("supertest");
 const should = require("chai").should();
 const server = require("./api");
 
-let { parseData, maxMonthConsumption, getDate } = require("./functions");
+let { getStreaks, getMostActiveDays } = require("./ramenFunctions");
 let testArray = require("./testArray");
 
 let newData = [
@@ -30,7 +30,7 @@ describe("checks day of max consumption in a month", () => {
   let newArr = mockData.concat(newData);
 
   it("should return most active day after adding new data", () => {
-    let maxConsumption = maxMonthConsumption(newArr);
+    let activeDays = getMostActiveDays(newArr);
     expect(maxConsumption[2].mostActiveDay).to.equal("02");
   });
 });

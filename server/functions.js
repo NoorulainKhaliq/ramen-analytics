@@ -40,7 +40,7 @@ let parseData = data => {
   return output;
 };
 
-//in addition to returning the total cups consumed, returned obj also provides how much of
+//in addition to returning the total cups consumed, returned array of objects also provides how much of
 //each type of ramen cups were consumed
 
 let totalCups = data => {
@@ -49,8 +49,12 @@ let totalCups = data => {
     const { "ramen-type": ramenType } = ramen;
     obj[ramenType] ? obj[ramenType]++ : (obj[ramenType] = 1);
   });
-  obj.total = Object.values(obj).reduce((prev, next) => prev + next);
-  return obj;
+  obj.total = data.length;
+  let objArr = [];
+  for (let key in obj) {
+    objArr.push({ [key]: obj[key] });
+  }
+  return objArr;
 };
 
 let getDate = data => {

@@ -1,6 +1,20 @@
+const csv = require("csvtojson");
+const csvFilePath = "./server/ramen.csv";
+
+//converts the csv data to json
+//this function was being repeatedly used in the get routes
+const getVisitsAsJson = () => {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(csvFilePath)
+      .on("end_parsed", resolve)
+      .on("error", reject);
+  });
+};
+
 //parsed data eliminates repeat and created an object for each unique person
-//the object contains total cup consumption and favorite ramen-type
-let parseData = data => {
+//the object contains total cup consumption and favorite ramen-type for each customer
+const getCustomers = data => {
   const people = {};
   const ramens = {};
   data.forEach(visit => {
@@ -43,7 +57,7 @@ let parseData = data => {
 //in addition to returning the total cups consumed, returned array of objects also provides how much of
 //each type of ramen cups were consumed
 
-let totalCups = data => {
+const getSalesByType = data => {
   let obj = {};
   data.forEach(ramen => {
     const { "ramen-type": ramenType } = ramen;
@@ -57,7 +71,7 @@ let totalCups = data => {
   return objArr;
 };
 
-let getDate = data => {
+const getDate = data => {
   let obj = {};
   data.forEach(ramen => {
     let year = ramen.date.slice(0, 4);
@@ -68,7 +82,7 @@ let getDate = data => {
 };
 
 //creates an object with month, day of highest consumption and the count of cups consumed
-let maxMonthConsumption = data => {
+const getMostActiveDays = data => {
   let obj = {};
   let dataToDate = getDate(data);
   Object.keys(dataToDate).forEach(date => {
@@ -94,4 +108,41 @@ let maxMonthConsumption = data => {
   return arrObj;
 };
 
-module.exports = { parseData, maxMonthConsumption, getDate, totalCups };
+const getStreaks = data => {
+  //sorts data by date
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+  let currentDate = sortedData[0].date.substr(0, 10);
+  let yesterdaysCups = 0;
+  let todaysCups = 0;
+  let streaks = [];
+  let currentStreak = [];
+  sortedData.forEach(({ date: dateTime }) => {
+    date = dateTime.substr(0, 10);
+    if (currentDate !== date) {
+      if (yesterdaysCups < todaysCups) {
+        if (!currentStreak.includes(currentDate)) {
+          currentStreak.push(currentDate);
+        }
+        currentStreak.push(date);
+      } else if (currentStreak.length > 0) {
+        streaks.push(currentStreak);
+        currentStreak = [];
+      }
+      currentDate = date;
+      yesterdaysCups = todaysCups;
+      todaysCups = 0;
+    }
+    todaysCups++;
+  });
+  return streaks;
+};
+
+module.exports = {
+  getCustomers,
+  getMostActiveDays,
+  getSalesByType,
+  getStreaks,
+  getVisitsAsJson
+};

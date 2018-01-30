@@ -2,7 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import React, { Component } from "react";
 import axios from "axios";
 
-import Users from "./Users";
+import Customers from "./Customers";
 import Header from "./Header";
 import Cups from "./Cups";
 
@@ -17,11 +17,11 @@ export default class Main extends Component {
 
   componentWillMount() {
     axios
-      .get("/api/users")
+      .get("/api/customers")
       .then(res => res.data)
       .then(users => this.setState({ users }));
     axios
-      .get("/api/cups")
+      .get("/api/sales/by-type")
       .then(res => res.data)
       .then(allCups => this.setState({ cups: allCups }));
   }
@@ -34,7 +34,7 @@ export default class Main extends Component {
           <Route
             exact
             path="/users"
-            render={props => <Users allUsers={this.state.users} />}
+            render={props => <Customers allUsers={this.state.users} />}
           />
           <Route
             exact

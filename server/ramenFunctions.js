@@ -71,11 +71,13 @@ const getSalesByType = data => {
   return objArr;
 };
 
+//retrieves date from data with value as array of cup consumption and year and
+//key as month-date
 const getDate = data => {
   let obj = {};
-  data.forEach(ramen => {
-    let year = ramen.date.slice(0, 4);
-    let date = ramen.date.slice(5, 10);
+  data.forEach(({ date: dateTime }) => {
+    let year = dateTime.slice(0, 4);
+    date = dateTime.slice(5, 10);
     obj[date] ? obj[date][0]++ : (obj[date] = [1, year]);
   });
   return obj;
@@ -107,7 +109,7 @@ const getMostActiveDays = data => {
   });
   return arrObj;
 };
-
+//gets streak of at least two days when ramen consumption increases
 const getStreaks = data => {
   //sorts data by date
   const sortedData = [...data].sort(
@@ -121,6 +123,7 @@ const getStreaks = data => {
   sortedData.forEach(({ date: dateTime }) => {
     date = dateTime.substr(0, 10);
     if (currentDate !== date) {
+      //new day
       if (yesterdaysCups < todaysCups) {
         if (!currentStreak.includes(currentDate)) {
           currentStreak.push(currentDate);

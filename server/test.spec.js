@@ -31,6 +31,6 @@ describe("checks day of max consumption in a month", () => {
 
   it("should return most active day after adding new data", () => {
     let activeDays = getMostActiveDays(newArr);
-    expect(maxConsumption[2].mostActiveDay).to.equal("02");
+    expect(activeDays[2].mostActiveDay).to.equal("02");
   });
 });

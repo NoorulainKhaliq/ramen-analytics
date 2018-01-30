@@ -1,8 +1,9 @@
 const csv = require("csvtojson");
 const csvFilePath = "./server/ramen.csv";
 
-//converts the csv data to json
-//this function was being repeatedly used in the get routes
+// converts the csv data to json
+// this function was being repeatedly used in the get routes
+// TODO: consider caching csv to json
 const getVisitsAsJson = () => {
   return new Promise((resolve, reject) => {
     csv()
@@ -12,8 +13,8 @@ const getVisitsAsJson = () => {
   });
 };
 
-//parsed data eliminates repeat and created an object for each unique person
-//the object contains total cup consumption and favorite ramen-type for each customer
+// parsed data eliminates repeat and created an object for each unique person
+// the object contains total cup consumption and favorite ramen-type for each customer
 const getCustomers = data => {
   const people = {};
   const ramens = {};
@@ -54,8 +55,8 @@ const getCustomers = data => {
   return output;
 };
 
-//in addition to returning the total cups consumed, returned array of objects also provides how much of
-//each type of ramen cups were consumed
+// in addition to returning the total cups consumed, returned array of objects also provides how much of
+// each type of ramen cups were consumed
 
 const getSalesByType = data => {
   let obj = {};
@@ -84,7 +85,9 @@ const getDate = data => {
 };
 
 //creates an object with month, day of highest consumption and the count of cups consumed
+//todo: ADD ERROR HANDLING for invalid data types or missing properties in data
 const getMostActiveDays = data => {
+  if (!Array.isArray(data) || data.length === 0) throw "invalid data";
   let obj = {};
   let dataToDate = getDate(data);
   Object.keys(dataToDate).forEach(date => {

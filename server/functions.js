@@ -40,6 +40,19 @@ let parseData = data => {
   return output;
 };
 
+//in addition to returning the total cups consumed, returned obj also provides how much of
+//each type of ramen cups were consumed
+
+let totalCups = data => {
+  let obj = {};
+  data.forEach(ramen => {
+    const { "ramen-type": ramenType } = ramen;
+    obj[ramenType] ? obj[ramenType]++ : (obj[ramenType] = 1);
+  });
+  obj.total = Object.values(obj).reduce((prev, next) => prev + next);
+  return obj;
+};
+
 let getDate = data => {
   let obj = {};
   data.forEach(ramen => {
@@ -77,4 +90,4 @@ let maxMonthConsumption = data => {
   return arrObj;
 };
 
-module.exports = { parseData, maxMonthConsumption, getDate };
+module.exports = { parseData, maxMonthConsumption, getDate, totalCups };

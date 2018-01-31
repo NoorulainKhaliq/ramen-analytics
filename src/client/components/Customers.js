@@ -10,20 +10,20 @@ export default class Customers extends Component {
   }
 
   render() {
-    let users = this.state.users;
+    let customers = this.state.users;
 
     return (
       <div>
-        <h3>Favorite Ramen by User</h3>
+        <h3>Favorite Ramen by Customer</h3>
         <div className="user">
           <ul>
-            {users &&
-              users.map((user, idx) => {
+            {customers &&
+              customers.map((customer, idx) => {
                 return (
                   <div className="user-info" key={idx}>
-                    <li>Name: {user.name}</li>
-                    <li>Ramen-Consumed: {user.cups}</li>
-                    <li>Favorite-Ramen: {user.favorite}</li>
+                    <li>Name: {customer.name}</li>
+                    <li>Ramen-Consumed: {customer.cups}</li>
+                    <li>Favorite-Ramen: {customer.favorite}</li>
                   </div>
                 );
               })}

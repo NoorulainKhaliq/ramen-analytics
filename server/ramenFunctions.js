@@ -113,46 +113,35 @@ const getMostActiveDays = data => {
   return arrObj;
 };
 
-//TODO: code cleanup!!!
 const getStreaks = data => {
   if (!Array.isArray(data) || data.length === 0) throw "invalid data";
+
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
-  let obj = getDate(sortedData);
-  let objArr = [];
-  for (let key in obj) {
-    let tempObj = {};
-    tempObj[key] = obj[key];
-    objArr.push(tempObj);
-  }
+
+  let dateObj = getDate(sortedData);
   let currStreak = [];
   let streak = [];
+  let yesterdaysCup = dateObj[Object.keys(dateObj)[0]][0];
   let date = sortedData[0].date.slice(5, 10);
-  let startingCup = Object.values(objArr[0]).toString();
-  for (let key in obj) {
-    let currCup = obj[key];
-    let currDate = key;
-    let startingVal = startingCup[0];
-    let currVal = currCup[0];
-    let newCurrDate = parseInt(currDate.slice(3, 5));
-    let newDate = parseInt(date.slice(3, 5));
-    if (startingVal < currVal && newDate < newCurrDate) {
-      if (!currStreak.includes(date)) {
-        currStreak.push(date);
-        let tempObj = {};
-        tempObj.consumed = startingVal;
-        tempObj.date = date + "-" + startingCup[1];
-        streak.push(tempObj);
+
+  for (let key in dateObj) {
+    let year = dateObj[key][1];
+    let todaysCup = dateObj[key][0];
+    let todaysDate = parseInt(key.slice(3, 5));
+    let yesterdaysDate = parseInt(date.slice(3, 5));
+
+    if (yesterdaysCup < todaysCup && yesterdaysDate < todaysDate) {
+      if (!currStreak.includes(yesterdaysDate)) {
+        currStreak.push(yesterdaysDate);
+        streak.push({ consumed: yesterdaysCup, date: date + "-" + year });
       }
-      currStreak.push(currDate);
-      let tempObj = {};
-      tempObj.consumed = currVal;
-      tempObj.date = currDate + "-" + currCup[1];
-      streak.push(tempObj);
+      currStreak.push(todaysDate);
+      streak.push({ consumed: todaysCup, date: key + "-" + year });
     }
-    date = currDate;
-    startingCup = currCup;
+    date = key;
+    yesterdaysCup = todaysCup;
   }
   return streak;
 };

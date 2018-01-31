@@ -107,8 +107,21 @@ describe("get streaks", () => {
         date: "2015-01-07T08:00:00.000Z"
       }
     ];
-    const expectedResult = [["2015-08-02", "2015-08-03", "2015-08-04"]];
-    expect(getStreaks(fakeVisits)).to.equal(expectedResult);
+    const expectedResult = [
+      {
+        consumed: 1,
+        date: "01-03-2015"
+      },
+      {
+        consumed: 2,
+        date: "01-06-2015"
+      },
+      {
+        consumed: 3,
+        date: "01-07-2015"
+      }
+    ];
+    expect(getStreaks(fakeVisits)).to.deep.equal(expectedResult);
   });
 });
 

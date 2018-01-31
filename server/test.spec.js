@@ -5,7 +5,7 @@ const should = require("chai").should();
 let { getStreaks, getMostActiveDays } = require("./ramenFunctions");
 
 describe("returns the most active day in each month", () => {
-  it("returns the most active day in each months ", () => {
+  it("returns the most active day in each month ", () => {
     const fakeVisits = [
       {
         person: "bob",

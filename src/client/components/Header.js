@@ -9,7 +9,7 @@ export default class Header extends Component {
           <div className="pull-right">
             <Link to="/users">
               <button type="button" className="btn btn-secondary btn-lg">
-                Users
+                Customers
               </button>
             </Link>
             <Link to="/cups">

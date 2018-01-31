@@ -17,7 +17,7 @@ export default class Users extends Component {
                 {Object.keys(cup).map((obj, i) => {
                   return (
                     <div key={i + 2}>
-                      {obj}:{cup[obj]}
+                      {obj}: {cup[obj]}
                     </div>
                   );
                 })}

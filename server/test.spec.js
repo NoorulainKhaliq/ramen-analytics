@@ -73,5 +73,44 @@ describe("returns the most active day in each month", () => {
   });
 });
 
+describe("get streaks", () => {
+  it("returns all consecutive days in which cup sales increased", () => {
+    const fakeVisits = [
+      {
+        person: "alice",
+        "ramen-type": "seafood",
+        date: "2015-01-03T03:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "kimchi",
+        date: "2015-01-06T04:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "kimchi",
+        date: "2015-01-06T05:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "chicken",
+        date: "2015-01-07T06:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "chicken",
+        date: "2015-01-07T07:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "seafood",
+        date: "2015-01-07T08:00:00.000Z"
+      }
+    ];
+    const expectedResult = [["2015-08-02", "2015-08-03", "2015-08-04"]];
+    expect(getStreaks(fakeVisits)).to.equal(expectedResult);
+  });
+});
+
 // what happens when i dont get the input im expecting?
 // what if it's not the expected data? like if its not an array?

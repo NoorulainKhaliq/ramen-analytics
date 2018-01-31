@@ -113,36 +113,78 @@ const getMostActiveDays = data => {
   return arrObj;
 };
 //gets streak of at least two days when ramen consumption increases
+// const getStreaks = data => {
+//   //sorts data by date
+//   const sortedData = [...data].sort(
+//     (a, b) => new Date(a.date) - new Date(b.date)
+//   );
+//   let currentDate = sortedData[0].date.substr(0, 10);
+//   let yesterdaysCups = 0;
+//   let todaysCups = 0;
+//   let streaks = [];
+//   let currentStreak = [];
+//   sortedData.forEach(({ date: dateTime }) => {
+//     date = dateTime.substr(0, 10);
+//     if (currentDate !== date) {
+//       //new day
+//       if (yesterdaysCups < todaysCups) {
+//         if (!currentStreak.includes(currentDate)) {
+//           currentStreak.push(currentDate);
+//         }
+//         currentStreak.push(date);
+//       } else if (currentStreak.length > 0) {
+//         streaks.push(currentStreak);
+//         currentStreak = [];
+//       }
+//       currentDate = date;
+//       yesterdaysCups = todaysCups;
+//       todaysCups = 0;
+//     }
+//     todaysCups++;
+//   });
+//   return streaks;
+// };
+
 const getStreaks = data => {
-  //sorts data by date
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
-  let currentDate = sortedData[0].date.substr(0, 10);
-  let yesterdaysCups = 0;
-  let todaysCups = 0;
-  let streaks = [];
-  let currentStreak = [];
-  sortedData.forEach(({ date: dateTime }) => {
-    date = dateTime.substr(0, 10);
-    if (currentDate !== date) {
-      //new day
-      if (yesterdaysCups < todaysCups) {
-        if (!currentStreak.includes(currentDate)) {
-          currentStreak.push(currentDate);
-        }
-        currentStreak.push(date);
-      } else if (currentStreak.length > 0) {
-        streaks.push(currentStreak);
-        currentStreak = [];
+  let obj = getDate(sortedData);
+  let objArr = [];
+  for (let key in obj) {
+    let tempObj = {};
+    tempObj[key] = obj[key];
+    objArr.push(tempObj);
+  }
+  let currStreak = [];
+  let streak = [];
+  let date = sortedData[0].date.slice(5, 10);
+  let startingCup = Object.values(objArr[0]).toString();
+  for (let key in obj) {
+    let currCup = obj[key];
+    let currDate = key;
+    let startingVal = startingCup[0];
+    let currVal = currCup[0];
+    let newCurrDate = parseInt(currDate.slice(3, 5));
+    let newDate = parseInt(date.slice(3, 5));
+    if (startingVal < currVal && newDate < newCurrDate) {
+      if (!currStreak.includes(date)) {
+        currStreak.push(date);
+        let tempObj = {};
+        tempObj.consumed = startingVal;
+        tempObj.date = date + "-" + startingCup[1];
+        streak.push(tempObj);
       }
-      currentDate = date;
-      yesterdaysCups = todaysCups;
-      todaysCups = 0;
+      currStreak.push(currDate);
+      let tempObj = {};
+      tempObj.consumed = currVal;
+      tempObj.date = currDate + "-" + currCup[1];
+      streak.push(tempObj);
     }
-    todaysCups++;
-  });
-  return streaks;
+    date = currDate;
+    startingCup = currCup;
+  }
+  return streak;
 };
 
 module.exports = {

@@ -123,7 +123,28 @@ describe("get streaks", () => {
     ];
     expect(getStreaks(fakeVisits)).to.deep.equal(expectedResult);
   });
+  it("throws an error when given invalid data", () => {
+    const fakeVisits = [];
+    expect(() => getStreaks(fakeVisits).to.throw(Error, "invalid data"));
+  });
+  it("returns an empty array when there are zero streaks", () => {
+    const fakeVisits = [
+      {
+        person: "alice",
+        "ramen-type": "chicken",
+        date: "2015-01-07T06:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "chicken",
+        date: "2015-01-08T07:00:00.000Z"
+      },
+      {
+        person: "alice",
+        "ramen-type": "seafood",
+        date: "2015-01-09T08:00:00.000Z"
+      }
+    ];
+    expect(getStreaks(fakeVisits)).to.be.empty;
+  });
 });
-
-// what happens when i dont get the input im expecting?
-// what if it's not the expected data? like if its not an array?

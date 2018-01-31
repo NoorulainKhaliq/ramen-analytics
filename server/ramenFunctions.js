@@ -112,40 +112,10 @@ const getMostActiveDays = data => {
   });
   return arrObj;
 };
-//gets streak of at least two days when ramen consumption increases
-// const getStreaks = data => {
-//   //sorts data by date
-//   const sortedData = [...data].sort(
-//     (a, b) => new Date(a.date) - new Date(b.date)
-//   );
-//   let currentDate = sortedData[0].date.substr(0, 10);
-//   let yesterdaysCups = 0;
-//   let todaysCups = 0;
-//   let streaks = [];
-//   let currentStreak = [];
-//   sortedData.forEach(({ date: dateTime }) => {
-//     date = dateTime.substr(0, 10);
-//     if (currentDate !== date) {
-//       //new day
-//       if (yesterdaysCups < todaysCups) {
-//         if (!currentStreak.includes(currentDate)) {
-//           currentStreak.push(currentDate);
-//         }
-//         currentStreak.push(date);
-//       } else if (currentStreak.length > 0) {
-//         streaks.push(currentStreak);
-//         currentStreak = [];
-//       }
-//       currentDate = date;
-//       yesterdaysCups = todaysCups;
-//       todaysCups = 0;
-//     }
-//     todaysCups++;
-//   });
-//   return streaks;
-// };
 
+//TODO: code cleanup!!!
 const getStreaks = data => {
+  if (!Array.isArray(data) || data.length === 0) throw "invalid data";
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );

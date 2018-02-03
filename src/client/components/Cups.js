@@ -8,8 +8,10 @@ export default class Users extends Component {
 
   render() {
     let allCups = this.props.allCups;
+    let total = allCups.pop();
+    console.log(total);
     return (
-      <div className="total-cups">
+      <div className="total">
         {allCups &&
           allCups.map((cup, idx) => {
             return (
@@ -24,6 +26,7 @@ export default class Users extends Component {
               </div>
             );
           })}
+        <div className="total">Total: {Object.values(total)} </div>
       </div>
     );
   }

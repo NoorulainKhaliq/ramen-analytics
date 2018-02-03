@@ -7,9 +7,8 @@ export default class Users extends Component {
   }
 
   render() {
-    let allCups = this.props.allCups;
-    let total = allCups.pop();
-    console.log(total);
+    let allCups = this.props.allCups.slice(0, -1);
+    let total = this.props.allCups.slice(-1)[0];
     return (
       <div className="total">
         {allCups &&

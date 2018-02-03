@@ -1,6 +1,16 @@
 body {
   margin: 0px;
-  background-color: #cec5cb !important;
+  background-color: #ffc300 !important;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+nav {
+  display: flex;
 }
 
 .user {
@@ -16,4 +26,9 @@ body {
 }
 h3 {
   text-align: center;
+}
+.landing-page {
+  background: url("/main.png") no-repeat center center;
+  height: 100%;
+  background-size: cover;
 }

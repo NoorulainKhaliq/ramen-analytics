@@ -5,7 +5,8 @@ import axios from "axios";
 import Customers from "./Customers";
 import Header from "./Header";
 import Cups from "./Cups";
-import SingleRamen from "./SIngleRamen";
+import SingleRamen from "./SingleRamen";
+import Home from "./Home";
 
 export default class Main extends Component {
   constructor() {
@@ -33,6 +34,7 @@ export default class Main extends Component {
       <div>
         <Header />
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route
             exact
             path="/customers"

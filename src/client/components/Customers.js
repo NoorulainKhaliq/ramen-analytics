@@ -11,7 +11,6 @@ export default class Customers extends Component {
 
   render() {
     let customers = this.state.users;
-
     return (
       <div>
         <h3>Favorite Ramen by Customer</h3>

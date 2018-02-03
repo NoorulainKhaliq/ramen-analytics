@@ -23,5 +23,5 @@ app
 
 //starts the server
 app.listen(3000, (req, res, next) => {
-  console.log("connected");
+  console.log("listening on port 3000");
 });

@@ -11,7 +11,7 @@ var config = {
   module: {
     rules: [
       {
-        test: /\.(csv|png)$/,
+        test: /\.(csv|png|jpg|svg)$/,
         use: [
           {
             loader: "file-loader",

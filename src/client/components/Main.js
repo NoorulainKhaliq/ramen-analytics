@@ -5,13 +5,15 @@ import axios from "axios";
 import Customers from "./Customers";
 import Header from "./Header";
 import Cups from "./Cups";
+import SingleRamen from "./SIngleRamen";
 
 export default class Main extends Component {
   constructor() {
     super();
     this.state = {
       users: {},
-      cups: []
+      cups: [],
+      currentRamenId: ""
     };
   }
 
@@ -33,13 +35,18 @@ export default class Main extends Component {
         <Switch>
           <Route
             exact
-            path="/users"
+            path="/customers"
             render={props => <Customers allUsers={this.state.users} />}
           />
           <Route
             exact
-            path="/cups"
+            path="/sales/by-type"
             render={props => <Cups allCups={this.state.cups} />}
+          />
+          <Route
+            exact
+            path="/ramen/:id"
+            render={props => <SingleRamen allCups={this.state.cups} />}
           />
         </Switch>
       </div>

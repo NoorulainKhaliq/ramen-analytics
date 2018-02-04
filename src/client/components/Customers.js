@@ -5,21 +5,21 @@ export default class Customers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: this.props.allUsers
+      customers: this.props.allCustomers
     };
   }
 
   render() {
-    let customers = this.state.users;
+    let customers = this.state.customers;
     return (
       <div>
         <h3>Favorite Ramen by Customer</h3>
-        <div className="user">
+        <div className="customer">
           <ul>
             {customers &&
               customers.map((customer, idx) => {
                 return (
-                  <div className="user-info" key={idx}>
+                  <div className="customer-info" key={idx}>
                     <li>Name: {customer.name}</li>
                     <li>Ramen-Consumed: {customer.cups}</li>
                     <li>Favorite-Ramen: {customer.favorite}</li>

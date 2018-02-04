@@ -28,7 +28,7 @@ h3 {
   text-align: center;
 }
 .landing-page {
-  background: url("/main.png") no-repeat center center;
+  background: url("/images/main.png") no-repeat center center;
   height: 100%;
   background-size: cover;
 }

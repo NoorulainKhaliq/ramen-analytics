@@ -13,12 +13,12 @@ nav {
   display: flex;
 }
 
-.user {
+.customer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
-.user-info {
+.customer-info {
   border: 1px solid black;
   list-style: none;
   margin: 10px;
@@ -31,4 +31,12 @@ h3 {
   background: url("/images/main.png") no-repeat center center;
   height: 100%;
   background-size: cover;
+}
+.single-cup {
+  text-align: center;
+}
+
+.total {
+  list-style: none;
+  text-align: center;
 }

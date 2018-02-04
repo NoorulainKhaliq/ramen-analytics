@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-export default class Users extends Component {
+export default class AllCups extends Component {
   constructor(props) {
     super(props);
   }

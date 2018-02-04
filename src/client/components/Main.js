@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Customers from "./Customers";
 import Header from "./Header";
-import Cups from "./Cups";
+import AllCups from "./Cups";
 import SingleRamen from "./SingleRamen";
 import Home from "./Home";
 
@@ -12,7 +12,7 @@ export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      users: {},
+      customers: {},
       cups: [],
       currentRamenId: ""
     };
@@ -22,7 +22,7 @@ export default class Main extends Component {
     axios
       .get("/api/customers")
       .then(res => res.data)
-      .then(users => this.setState({ users }));
+      .then(customers => this.setState({ customers }));
     axios
       .get("/api/sales/by-type")
       .then(res => res.data)
@@ -38,12 +38,12 @@ export default class Main extends Component {
           <Route
             exact
             path="/customers"
-            render={props => <Customers allUsers={this.state.users} />}
+            render={props => <Customers allCustomers={this.state.customers} />}
           />
           <Route
             exact
             path="/sales/by-type"
-            render={props => <Cups allCups={this.state.cups} />}
+            render={props => <AllCups allCups={this.state.cups} />}
           />
           <Route
             exact

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { Image, rounded, Accordion } from "react-bootstrap";
 import createBrowserHistory from "history/createBrowserHistory";
 const images = importAll(
   require.context("../../../images", false, /\.(png|jpe?g|svg)$/)
 );
 
 let filterRamen = (currRamen, allCups) => {
-  console.log(images, "from filter");
   let selectedRamen;
   let cups;
   allCups.filter(ramen => {
@@ -53,7 +53,7 @@ export default class SingleRamen extends Component {
       <div className="single-cup">
         <p>Ramen: {currentRamen}</p>
         <p>Sold: {cupsSold}</p>
-        <img src={this.state.ramenImg} />
+        <img src={this.state.ramenImg} width="25%" />
       </div>
     );
   }

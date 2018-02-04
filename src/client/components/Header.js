@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Grid, Row, Col } from "react-bootstrap";
 
 export default class Header extends Component {
   render() {
     return (
-      <div className="header" mt={2} mb={2}>
+      <div className="header">
         <nav>
           <div xs={6} md={4} style={{ margin: 10 }}>
             <Link to="/">

@@ -14,7 +14,7 @@ export default class Customers extends Component {
     return (
       <Table hover bordered>
         <thead>
-          <tr>
+          <tr md={6}>
             <th>#</th>
             <th>Name</th>
             <th>Cups Consumed</th>
@@ -25,11 +25,15 @@ export default class Customers extends Component {
           {customers &&
             customers.map((customer, idx) => {
               return (
-                <tr key={idx + 1}>
+                <tr key={idx + 1} md={6}>
                   <td>{idx + 1}</td>
                   <td>{customer.name}</td>
                   <td>{customer.cups}</td>
-                  <td>{customer.favorite}</td>
+                  <td>
+                    <NavLink to={`/ramen/${customer.favorite}`}>
+                      {customer.favorite}
+                    </NavLink>
+                  </td>
                 </tr>
               );
             })}
@@ -38,42 +42,3 @@ export default class Customers extends Component {
     );
   }
 }
-
-{
-  /* <Table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</Table> */
-}
-
-// <div>
-//         <h3>Favorite Ramen by Customer</h3>
-//         <div className="customer">
-//           <ul>
-//             {customers &&
-//               customers.map((customer, idx) => {
-//                 return (
-//                   <div className="customer-info" key={idx}>
-//                     <li>Name: {customer.name}</li>
-//                     <li>Ramen-Consumed: {customer.cups}</li>
-//                     <li>Favorite-Ramen: {customer.favorite}</li>
-//                   </div>
-//                 );
-//               })}
-//           </ul>
-//         </div>
-//       </div>

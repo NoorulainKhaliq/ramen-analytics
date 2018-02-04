@@ -5,17 +5,18 @@ var config = {
   entry: "./src/client/index.js",
   output: {
     path: __dirname,
-    filename: "./public/bundle.js",
-    publicPath: "./public"
+    filename: "./public/bundle.js"
   },
   module: {
     rules: [
       {
-        test: /\.(csv|png|jpg|svg)$/,
+        test: /\.(csv|png|jpe?g|svg)$/,
         use: [
           {
             loader: "file-loader",
-            options: { outputPath: "./public" }
+            options: {
+              name: "[name].[ext]"
+            }
           }
         ]
       },

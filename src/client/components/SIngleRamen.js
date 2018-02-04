@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
 let filterRamen = (currRamen, allCups) => {
+  console.log(images);
   let selectedRamen;
   let cups;
   allCups.filter(ramen => {
@@ -14,12 +15,21 @@ let filterRamen = (currRamen, allCups) => {
   return [selectedRamen, cups];
 };
 
+function importAll(r) {
+  return r.keys().map(r);
+}
+
+const images = importAll(
+  require.context("../../../public/images", false, /\.(png|jpe?g|svg)$/)
+);
+
 export default class SingleRamen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentRamen: "",
-      cupsSold: ""
+      cupsSold: "",
+      ramenImg: ""
     };
   }
 
@@ -33,9 +43,9 @@ export default class SingleRamen extends Component {
   }
 
   render(props) {
+    console.log(images, "from render");
     let currentRamen = this.state.currentRamen;
     let cupsSold = this.state.cupsSold;
-    console.log(this.state.currentRamen, this.state.cupsSold);
     return (
       <div className="single-cup">
         <p>Ramen: {currentRamen}</p>

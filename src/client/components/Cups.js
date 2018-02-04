@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { Table, hover, bordered, xs, md } from "react-bootstrap";
 
 export default class AllCups extends Component {
   constructor(props) {
@@ -10,23 +11,31 @@ export default class AllCups extends Component {
     let allCups = this.props.allCups.slice(0, -1);
     let total = this.props.allCups.slice(-1)[0];
     return (
-      <div className="total-cups">
+      <Table bordered hover width="50%">
+        <thead>
+          <tr md={6}>
+            <th>Ramen-Type</th>
+            <th>Cups Sold</th>
+          </tr>
+        </thead>
         {allCups &&
           allCups.map((cup, idx) => {
             return (
-              <div className="ramen-info" key={idx + 1}>
+              <tbody>
                 {Object.keys(cup).map((obj, i) => {
                   return (
-                    <div key={i + 2}>
-                      <NavLink to={`/ramen/${obj}`}>{obj}</NavLink>: {cup[obj]}
-                    </div>
+                    <tr md={6}>
+                      <td>
+                        <NavLink to={`/ramen/${obj}`}>{obj}</NavLink>
+                      </td>
+                      <td>{cup[obj]}</td>
+                    </tr>
                   );
                 })}
-              </div>
+              </tbody>
             );
           })}
-        <div className="total">Total: {Object.values(total)} </div>
-      </div>
+      </Table>
     );
   }
 }

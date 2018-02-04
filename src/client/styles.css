@@ -9,6 +9,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
+
 nav {
   display: flex;
 }
@@ -29,8 +30,8 @@ h3 {
 }
 .landing-page {
   background: url("/images/main.png") no-repeat center center;
-  height: 100%;
   background-size: cover;
+  height: 100%;
 }
 .single-cup {
   text-align: center;

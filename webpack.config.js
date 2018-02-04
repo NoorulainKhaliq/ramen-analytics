@@ -1,21 +1,23 @@
 "use strict";
 const { resolve } = require("path");
+const path = require("path");
 
 var config = {
   entry: "./src/client/index.js",
   output: {
-    path: __dirname,
-    filename: "./public/bundle.js"
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "public")
   },
   module: {
     rules: [
       {
-        test: /\.(csv|png|jpe?g|svg)$/,
+        test: /\.(csv|png|jpe?g|svg|html)$/,
         use: [
           {
             loader: "file-loader",
             options: {
-              name: "[name].[ext]"
+              name: "[name].[ext]",
+              outputPath: "images/"
             }
           }
         ]

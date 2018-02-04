@@ -36,7 +36,12 @@ h3 {
   text-align: center;
 }
 
-.total {
+.total,
+.total-cups {
   list-style: none;
   text-align: center;
+}
+
+.single-cup img {
+  width: 25%;
 }

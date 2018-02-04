@@ -2,25 +2,10 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Image, rounded, Accordion } from "react-bootstrap";
 import createBrowserHistory from "history/createBrowserHistory";
+import { importAll, filterRamen } from "../functions";
 const images = importAll(
   require.context("../../../images", false, /\.(png|jpe?g|svg)$/)
 );
-
-let filterRamen = (currRamen, allCups) => {
-  let selectedRamen;
-  let cups;
-  allCups.filter(ramen => {
-    if (Object.keys(ramen)[0] === currRamen) {
-      selectedRamen = Object.keys(ramen)[0];
-      cups = Object.values(ramen)[0];
-    }
-  });
-  return [selectedRamen, cups];
-};
-
-function importAll(r) {
-  return r.keys().map(r);
-}
 
 export default class SingleRamen extends Component {
   constructor(props) {
@@ -53,7 +38,7 @@ export default class SingleRamen extends Component {
       <div className="single-cup">
         <p>Ramen: {currentRamen}</p>
         <p>Sold: {cupsSold}</p>
-        <img src={this.state.ramenImg} width="25%" />
+        <img src={this.state.ramenImg} />
       </div>
     );
   }

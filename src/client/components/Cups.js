@@ -10,7 +10,7 @@ export default class AllCups extends Component {
     let allCups = this.props.allCups.slice(0, -1);
     let total = this.props.allCups.slice(-1)[0];
     return (
-      <div className="total">
+      <div className="total-cups">
         {allCups &&
           allCups.map((cup, idx) => {
             return (

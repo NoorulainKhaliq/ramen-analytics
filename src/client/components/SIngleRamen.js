@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
+const images = importAll(
+  require.context("../../../images", false, /\.(png|jpe?g|svg)$/)
+);
 
 let filterRamen = (currRamen, allCups) => {
-  console.log(images);
+  console.log(images, "from filter");
   let selectedRamen;
   let cups;
   allCups.filter(ramen => {
@@ -18,10 +21,6 @@ let filterRamen = (currRamen, allCups) => {
 function importAll(r) {
   return r.keys().map(r);
 }
-
-const images = importAll(
-  require.context("../../../public/images", false, /\.(png|jpe?g|svg)$/)
-);
 
 export default class SingleRamen extends Component {
   constructor(props) {
@@ -39,17 +38,22 @@ export default class SingleRamen extends Component {
     let ramenObj = customHistory.location.pathname.split("/");
     let currentRamen = ramenObj[ramenObj.length - 1];
     let ramen = filterRamen(currentRamen, allCups);
-    this.setState({ currentRamen: ramen[0], cupsSold: ramen[1] });
+    let ramenImg = images.find(fileName => fileName.includes(currentRamen));
+    this.setState({
+      currentRamen: ramen[0],
+      cupsSold: ramen[1],
+      ramenImg: "/" + ramenImg
+    });
   }
 
   render(props) {
-    console.log(images, "from render");
     let currentRamen = this.state.currentRamen;
     let cupsSold = this.state.cupsSold;
     return (
       <div className="single-cup">
         <p>Ramen: {currentRamen}</p>
         <p>Sold: {cupsSold}</p>
+        <img src={this.state.ramenImg} />
       </div>
     );
   }

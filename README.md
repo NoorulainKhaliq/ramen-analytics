@@ -68,6 +68,7 @@ delicious cup ramen.
 ```
 git clone https://github.com/NoorulainKhaliq/ramen-analytics.git
 npm install
+npm start
 http://localhost:3000
 ```
 
@@ -78,6 +79,15 @@ Route 1: http://localhost:3000/api/customers
 Route 2: http://localhost:3000/api/sales/by-type
 Route 3: http://localhost:3000/api/sales/by-day/most-active
 Route 4: http://localhost:3000/api/sales/streaks
+```
+
+## To access frontend
+
+```
+Home view: http://localhost:3000
+Route 1: http://localhost:3000/customers
+Route 2: http://localhost:3000/sales/by-type
+Route 3: http://localhost:3000/ramen/seafood
 ```
 
 ## To run test

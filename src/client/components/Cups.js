@@ -21,10 +21,10 @@ export default class AllCups extends Component {
         {allCups &&
           allCups.map((cup, idx) => {
             return (
-              <tbody>
+              <tbody key={idx + 1}>
                 {Object.keys(cup).map((obj, i) => {
                   return (
-                    <tr md={6}>
+                    <tr md={6} key={i + 2}>
                       <td>
                         <NavLink to={`/ramen/${obj}`}>{obj}</NavLink>
                       </td>

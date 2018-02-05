@@ -1,4 +1,4 @@
-﻿# Ramen Analytics
+﻿<!-- # Ramen Analytics
 
 ## Project Description
 
@@ -54,4 +54,34 @@ delicious cup ramen.
 * We will be reviewing your solution commit-by-commit so that we can
   follow along with your thought process. Please make frequent
   cohesive commits so we can see what your work progression looks like
-  vs. giant single blob.
+  vs. giant single blob. -->
+
+# Ramen-Analytics
+
+## Projet Description
+
+JSON REST-style API that processes and exposes data about
+delicious cup ramen.
+
+## To get the project started
+
+```
+git clone https://github.com/NoorulainKhaliq/ramen-analytics.git
+npm install
+http://localhost:3000
+```
+
+## To access backend endpoints
+
+```
+Route 1: http://localhost:3000/api/customers
+Route 2: http://localhost:3000/api/sales/by-type
+Route 3: http://localhost:3000/api/sales/by-day/most-active
+Route 4: http://localhost:3000/api/sales/streaks
+```
+
+## To run test
+
+```
+npm run test
+```
